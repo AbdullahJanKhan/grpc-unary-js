@@ -43,7 +43,7 @@ const onClientReady = () => {
     console.log(`${chunk.username} ==> ${chunk.message}`);
   });
 
-  rl.on("line", (line) => {
+  io.on("line", (line) => {
     if (line === "quit") {
       call.end();
     } else {

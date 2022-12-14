@@ -8,7 +8,7 @@ const server = new grpc.Server();
 
 const callObjByUsername = new Map();
 
-const Chat = () => {
+const Chat = (call) => {
   call.on("data", (req) => {
     const username = call.metadata.get("username")[0];
     const msg = req.message;

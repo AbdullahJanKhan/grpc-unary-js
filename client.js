@@ -1,16 +1,25 @@
 const grpc = require("@grpc/grpc-js");
 const protoLoader = require("@grpc/proto-loader");
 const packageDefinition = protoLoader.loadSync("./proto/bookStore.proto", {});
+const fs = require("fs");
+
 const bookStorePackage =
   grpc.loadPackageDefinition(packageDefinition).bookStorePackage;
 
-const client = new bookStorePackage.Book(
-  "localhost:50051",
-  grpc.credentials.createInsecure()
+const credentials = grpc.credentials.createSsl(
+  fs.readFileSync("./certs/ca.crt"),
+  fs.readFileSync("./certs/client.key"),
+  fs.readFileSync("./certs/client.crt")
 );
 
+const client = new bookStorePackage.Book("localhost:50051", credentials);
+
 client.createBook(
-  { id: -1, book: "Cracking the Interview" },
+  {
+    author: "est qui aliqua consequat",
+    description: "sit",
+    name: "eiusmod laboris Lorem sint",
+  },
   (err, response) => {
     if (err) {
       console.log(err);

@@ -8,7 +8,8 @@
     "start": "node server",
     "client": "node client",
     "start-static": "ts-node server-static",
-    "client-static": "ts-node client-static"
+    "client-static": "ts-node client-static",
+    "gen:certs": "./scripts/gen-certs.sh"
   },
   "keywords": [],
   "author": "",

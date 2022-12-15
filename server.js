@@ -27,6 +27,7 @@ server.bindAsync(
 const books = [];
 
 function createBook(call, callback) {
+  console.log(call.request);
   const book = call.request;
   const bookObject = {
     id: books.length + 1,
@@ -37,11 +38,13 @@ function createBook(call, callback) {
 }
 
 function readBook(call, callback) {
+  console.log(call.request);
   const id = call.request.id;
   const book = books.find((book) => book.id === id);
   callback(null, book);
 }
 
 function readBooks(call, callback) {
+  console.log(call.request);
   callback(null, { books: books });
 }
